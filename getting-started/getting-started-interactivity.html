@@ -2,15 +2,15 @@
 <article class="bcls-article">
   <summary>{{ page.description }}</summary>
   <section class="bcls-section">
-    <p>The HapYak plugin for the Brightcove Player allows the player to take advantage of the features provided by Brightcove Interactivity. When interactions are added to a Brightcove Interactivity project, they will automatically appear on the corresponding video. This removes the need to copy and publish embed code within Brightcove Interactivity Studio.</p>
+    <p>The interactivity plugin for the Brightcove Player allows the player to take advantage of the features provided by Brightcove Interactivity. When interactions are added to a Brightcove Interactivity project, they will automatically appear on the corresponding video.</p>
   </section>
   <section class="bcls-section">
     <h2 id="configure-player">Before you get started</h2>
-    <p>Before you can started with interactivity, you must have a Brightcove Player configured with the HapYak plugin. Adding the HapYak plugin to a Brightcove Player will allow interactivity to be displayed inside of the player during video playback. The HapYak plugin can coexist with other player plugins. For complete steps on creating a HapYak-enabled player, see <a href="configuring-player-plugin.html">Configuring a Brightcove Player with the HapYak plugin</a>.</p>
+    <p>Before you can started with interactivity, you must have a Brightcove Player configured with the interactivity plugin. Adding the interactivity plugin to a Brightcove Player will allow interactivity to be displayed inside of the player during video playback. The interactivity plugin can coexist with other player plugins. For complete steps on creating an interactivity-enabled player, see <a href="configuring-player-plugin.html">Configuring a Brightcove Player with the Interactivity plugin</a>.</p>
   </section>
   <section class="bcls-section">
     <h2 id="project-creation">Creating a Brightcove Interactivity project</h2>
-    <p>When a video is played inside of a HapYak-enabled Brightcove Player, the following things happen: </p>
+    <p>When a video is played inside of an interactivity-enabled Brightcove Player, the following things happen: </p>
     <ul>
       <li>The Brightcove video ID, title, tags and custom fields are passed to Brightcove Interactivity</li>
       <li>Brightcove Interactivity attempts to look up the video ID within your group</li>
@@ -28,16 +28,14 @@
       <li>Open the <strong>Media</strong> module.</li>
       <li>Select a video to publish by checking the box next to the video thumbnail.</li>
       <li>Click <span class="button-blue">Publish and embed... ˇ</span> &gt; <strong>Publish to web.</strong></li>
-      <li>Select the player with the HapYak plugin.</li>
+      <li>Select an interactivity-enabled player.</li>
       <li>Click the preview link to open a preview in a new browser tab.
         <figure class="bcls-figure"> <img src="/assets/images/s-brightcove-interactivity-img/getting-started/gs-interactivity/gsi-vc-publish.png"> </figure>
       </li>
       <li>Play the preview video (the video only needs to be played for a few seconds). This will auto-create a project in Brightcove Interactivity.
         <aside class="bcls-aside bcls-aside--information">Note: You must preview the video using the preview link. Previewing the video with the preview player in the Media module <strong>will not</strong> auto-create a project.</aside>
       </li>
-      <li>Login to Brightcove Interactivity Studio (<a href="https://www.hapyak.com/login">https://www.hapyak.com/login</a>).
-        <aside class="bcls-aside bcls-aside--information language-editable">Note: For new accounts, login credentials can be provided by Brightcove onboarding or technical support. For existing accounts, anyone with admin level access to Brightcove Interactivity Studio can login and invite additional users from the admin panel.</aside></li>
-      <li>In the left navigation, click <strong>Manage</strong>.</li>
+      <li>In the left navigation, click <strong>Interactivity</strong>.</li>
       <li>A list of projects will appear. Confirm the video you just published appears in the project list.
         <figure class="bcls-figure"> <img src="/assets/images/s-brightcove-interactivity-img/getting-started/gs-interactivity/gsi-hapyak-projects-list.png"> </figure>
         <aside class="bcls-aside bcls-aside--information">Note: The <strong>Tags</strong> column includes all tags associated with the video. An additional tag of <strong>live</strong> is added to each project automatically created by the plugin.</aside>
@@ -48,7 +46,7 @@
     <h2 id="text-overlay">Adding a text overlay</h2>
     <p>In this topic a simple text overlay will be added just to validate that the interactivity can be viewed inside of a Brightcove Player.</p>
     <ol class="bcls-tasklist-restart">
-      <li>In the Brightcove Interactivity UI, click on the project to open it.</li>
+      <li>In the <strong>Interactivity</strong> module, click on the project to open it.</li>
       <li>In the bottom toolbar, click on the text overlay button.
         <figure class="bcls-figure"> <img src="/assets/images/s-brightcove-interactivity-img/getting-started/gs-interactivity/gsi-hapyak-add-overlay.png"> </figure>
       </li>
@@ -69,7 +67,7 @@
   </section>
   <section class="bcls-section">
     <h2 id="preview-publish">Previewing and generating embed code for a video</h2>
-    <p>Once an interaction has been added to a Brightcove Interactivity project, preview the video to ensure the interactivity is working as expected. When a video is loaded in a HapYak-enabled Brightcove Player, the following things happen:</p>
+    <p>Once an interaction has been added to a Brightcove Interactivity project, preview the video to ensure the interactivity is working as expected. When a video is loaded in an interactivity-enabled Brightcove Player, the following things happen:</p>
     <ol class="bcls-tasklist-restart">
       <li>The Brightcove video ID, title, tags and custom fields are sent to Brightcove Interactivity.</li>
       <li>Brightcove Interactivity attempts to look up the video ID within your Brightcove Interactivity group.</li>
