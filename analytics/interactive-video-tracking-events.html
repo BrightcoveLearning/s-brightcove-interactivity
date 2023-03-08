@@ -1,0 +1,155 @@
+<h1>{{ page.title }}</h1>
+<article class="bcls-article">
+  <summary>{{ page.description }}</summary>
+  <section class="bcls-section">
+    <p>Brightcove Interactivity tracks in detail how  viewers interact with  video. More than just play and pause, we track a whole set of specific events associated with your video that give you deep-level insights into viewer choices, behavior and engagement.</p>
+    <p>There are three event<sup>1</sup> types:</p>
+    <ol>
+      <li><strong>Player Action</strong> - Details how a viewer played, paused, and progressed through the video</li>
+      <li><strong>Annotation View</strong> and <strong>Annotation Ended</strong> - Details which annotations were seen by the viewer and for how long</li>
+      <li><strong>Annotation Action</strong> - Details how the user interacted with the annotation</li>
+    </ol>
+    <p>Each event has a set of properties associated with it. For example, clicking on a call-to-action annotation could have the following properties:</p>
+    <ul>
+      <li>The viewer’s <strong>UserID</strong><sup>2</sup> was &quot;kyle_smith&quot;</li>
+      <li>The annotation’s <strong>duration</strong> was 8.35 seconds</li>
+      <li>5 seconds <strong>elapsed</strong> before the viewer clicked the link</li>
+      <li>The annotation’s link <strong>target</strong> was <code>http://www.rei.com/product/763713</code></li>
+    </ul>
+    <p>---------------</p>
+    <p><sup>1</sup> Attribute name is &quot;event&quot;</p>
+    <p><sup>2</sup> Available when the viewer user is logged into the portal</p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="common-event">Common event properties</h2>
+    <p>These properties are present on all events.</p>
+    <h3>Identifiers</h3>
+    <ul>
+      <li><strong>Project ID</strong> - Present if the track was loaded from a project</li>
+      <li><strong>Video ID</strong> - Brightcove Interactivity internal video ID</li>
+      <li><strong>Video Source</strong> - Origin source of video asset (e.g. HTML5, provider)</li>
+      <li><strong>Video Source ID</strong> - The original video URL or provider ID for the asset</li>
+      <li><strong>Track ID</strong> - Brightcove Interactivity internal ID for group of annotations being shown</li>
+      <li><strong>Host</strong> - The page the video is being served from</li>
+    </ul>
+    <h3>Object information</h3>
+    <ul>
+      <li><strong>Video Duration</strong> - The duration of the video (in seconds)</li>
+      <li><strong>Project Title</strong> - If known, title of the project</li>
+      <li><strong>Video Title</strong> - If known, title of the video</li>
+      <li><strong>Num Annotations</strong> - The total number of annotations on the video</li>
+      <li><strong>Tags</strong> - Author-provided tags associated with the Track or Project objects</li>
+    </ul>
+    <h3>Optional information</h3>
+    <p>You can pass in optional properties to track like user IDs and other custom user details that will help you make sense of the data later on. When present, this data will become properties of every event.</p>
+    <ul>
+      <li><strong>Partner User ID</strong> - hashed userID from an external system</li>
+      <li><strong>Partner Username</strong> - human-readable username to be displayed in reports</li>
+      <li><strong>Partner / *custom</strong> - arbitrary name=value pairs can be passed for custom tracking</li>
+    </ul>
+  </section>
+  <section class="bcls-section">
+    <h2 id="annotation-event-generic">Annotation event generic properties</h2>
+    <p>These properties are present on Annotation View, Annotation End and Annotation Action events.</p>
+    <h3>Identifiers</h3>
+    <ul>
+      <li><strong>Annotation ID</strong> - Brightcove Interactivity internal ID for the annotation</li>
+    </ul>
+    <h3>Timing information</h3>
+    <ul>
+      <li><strong>Annotation Start Time</strong> - The timestamp when the annotation is shown or activated</li>
+      <li><strong>Annotation Duration</strong> - The length of time the annotation is active</li>
+      <li><strong>Elapsed</strong> - The length of time the annotation was viewed for. Since some annotations can pause the video, this property accounts for the total time it was on-screen.</li>
+      <li><strong>Remaining</strong> - How much time left until the end of the video</li>
+      <li><strong>Paused</strong> - Boolean for whether video is paused or not, when the event is logged</li>
+      <li><strong>Play Time Accrued</strong> - The total amount of time spent playing the video, when the event is logged</li>
+      <li><strong>Video Offset</strong> - The current time in the video, when the event is logged</li>
+      <li><strong>Video Percent Complete</strong> - The total percentage of video watched, when the event is logged.   This is the position of the playhead expressed as a percentage of total video duration.</li>
+    </ul>
+    <h3>Interaction information</h3>
+    <ul>
+      <li><strong>Action</strong> - Present for &quot;Player Action&quot; and "Annotation Action" event types. Refer to the specific annotation type to see a list of possible values.</li>
+    </ul>
+  </section>
+  <section class="bcls-section">
+    <h2 id="annotation-specific-event">Annotation specific event properties </h2>
+    <h3>Linked annotation types: Pop, Image, HotLink</h3>
+    <ul>
+      <li><strong>Action</strong> - "Click" or "External Click"</li>
+      <li><strong>Target</strong> - The URL of the link</li>
+      <li><strong>Target Annotation</strong> - The target annotation ID if used for in-video navigation</li>
+      <li><strong>Target Time</strong> - The target timestamp if used for in-video navigation</li>
+      <li><strong>Target Track</strong> - The track ID if the click caused another track to load</li>
+      <li><strong>Target Expression</strong> - The optional javascript expression evaluated</li>
+      <li><strong>Text</strong> - If present, the text displayed in the annotation</li>
+    </ul>
+    <h3>Quiz annotation</h3>
+    <ul>
+      <li><strong>Action</strong> - "Answer", "Submit", "Prev", "Next", "Skipped"</li>
+      <li><strong>Answer</strong> - For "Answer", the text of the answer provided by the viewer</li>
+      <li><strong>Question</strong> - For "Answer", the text of the question answered by the viewer</li>
+      <li><strong>Num Questions</strong> - For "Submit", the total number of questions in the quiz annotation.   This is useful for a quiz with multiple questions in it.</li>
+      <li><strong>Num Answered</strong> - For "Submit", the total number of answers provided by the viewer. This is useful for a quiz with multiple questions in it.</li>
+      <li><strong>Num Correct</strong> - For "Submit", the total number of correct answers provided by the viewer. This is useful for a quiz with multiple questions in it.</li>
+      <li><strong>Correct</strong> - For "Answer", true or false</li>
+      <li><strong>Pass</strong> - For "Submit", true or false</li>
+      <li><strong>Target/Target Time/Target Track/Target Expression</strong> - For "Submit", present if an automatic pass/fail follow-up action is configured for the quiz.</li>
+    </ul>
+    <h3>Table of Contents annotation</h3>
+    <ul>
+      <li><strong>Action</strong> - "Click", "Prev", "Next", "Expand", "Collapse"</li>
+      <li><strong>Type</strong> - &quot;contents&quot;</li>
+      <li><strong>Target</strong> - Annotation ID of the clicked chapter</li>
+      <li><strong>Target Time</strong> - Time offset of the clicked chapter</li>
+      <li><strong>Text</strong> - Text (name) of the target chapter</li>
+    </ul>
+  </section>
+  <section class="bcls-section">
+    <h2 id="player-event-generic">Player event generic properties </h2>
+    <p>These properties are present on all player action events.</p>
+    <h3>Timing information</h3>
+    <ul>
+      <li><strong>Play Time Accrued</strong> - The total amount of time spent playing the video</li>
+      <li><strong>Video Offset</strong> - The current time in the video when the event is logged</li>
+      <li><strong>Video Percent Complete</strong> - The total percentage of video watched, when the event is logged.   This is the position of the playhead expressed as a percentage of total video duration.</li>
+    </ul>
+    <h3>Player interaction information</h3>
+    <ul>
+      <li><strong>Action</strong> - Values listed below
+        <ul>
+          <li><strong>Load</strong> - A Brightcove Interactivity-enabled video loaded on the page</li>
+          <li><strong>Play, Pause, Seek, Volume, Fullscreen</strong> - Standard video player functionality</li>
+          <li><strong>Progress</strong> - Fires every 5 seconds</li>
+          <li><strong>End - Complete</strong> - Fires once when the video reaches the end if the view time is equal to the video duration</li>
+          <li><strong>End - Over</strong> - Fires once when the video reaches the end if the view time is greater than the video duration; typically this means the viewer re-watched certain segments of the video</li>
+          <li><strong>End - Under</strong> - Fires once when the video reaches the end if the view time is less than the video duration; typically this means that the viewer skipped over a section of the video</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <section class="bcls-section">
+    <h2 id="standard-properties">Standard properties for all events</h2>
+    <p>This is general information about the viewer and environment, similar to most web analytics systems.   These values are not available to client-side analytics.</p>
+    <ul>
+      <li><code>browser</code></li>
+      <li><code>ip</code></li>
+      <li><code>os</code></li>
+      <li><code>referrer</code></li>
+      <li><code>referring_domain</code></li>
+    </ul>
+  </section>
+  <section class="bcls-section">
+    <h2 id="analytics-api">Analytics API</h2>
+    <p>All events and properties are exposed as a JSON object made available via the "onTrackingEvent" callback function on the Brightcove Interactivity Viewer Object.</p>
+    <pre>
+        <code>
+hapyak.viewer({
+    onTrackingEvent: function(data) {
+        console.log('Brightcove Interactivity / ' + data.event, data.properties);
+    }
+});
+</code>
+</pre>
+    <p>Documentation on the Brightcove Interactivity Viewer Object can be found <a href="https://apis.support.brightcove.com/interactivity/embed-api/reference.html#viewer_api_hapyakviewer">here</a>.</p>
+  </section>
+</article>
