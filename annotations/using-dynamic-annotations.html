@@ -1,0 +1,150 @@
+<h1>{{ page.title }}</h1>
+<article class="bcls-article">
+  <summary>{{ page.description }}</summary>
+  <section class="bcls-section">
+    <p>Through the use of variables and display rules it is possible to create interactive videos that modify the viewing
+      experience based on a viewer’s input.
+      Annotations are made dynamic through the use of JavaScript variables.
+      Variables have two primary functions:</p>
+    <ol>
+      <li> To display dynamic content in a text commentary, for example, <code>Welcome Back, {{userName}}!</code></li>
+      <li> To be used in display rules to control whether an annotation is displayed or not, for example, &quot;Display Rule: <code>allowed_to_see==true</code>&quot;</li>
+    </ol>
+    <p>This topic will explain how to create and use variables for a dynamic, adaptive video
+      experience for viewers.</p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="variable-types">Variable types</h2>
+    <p>There are different types of variables available when using Brightcove Interactivity.</p>
+    <ul>
+      <li><strong>Standard variables</strong> - Variables explicitly set when an annotation is clicked</li>
+      <li><strong>Quiz variables</strong> - Variables automatically created by quiz annotations</li>
+      <li><strong>Environment variables</strong> - Variables explicitly passed to the Embed API from an external system.</li>
+    </ul>
+  </section>
+  <section class="bcls-section">
+    <h2 id="standard-variables">Standard variables</h2>
+    <p>To define a standard variable on an annotation:</p>
+    <ol class="bcls-tasklist-restart">
+      <li>Click on an annotation's Edit menu.</li>
+      <li>Click <strong>Link</strong> and then click the <strong>Advanced</strong> tab.
+        <figure class="bcls-figure"> <img src="/assets/images/s-brightcove-interactivity-img/annotations/dynamic-annotations/advanced-tab.png"> </figure>
+      </li>
+      <li>In the <strong>JavaScript</strong> field, enter a new JavaScript variable name or variable assignment.</li>
+    </ol>
+    <p>When the annotation is clicked by a viewer, the variable assignment code will be executed. </p>
+    <h3>Variable name requirements</h3>
+    <ul>
+      <li>Variable names must begin with a letter, underscore ( _ ), or $</li>
+      <li>Use = for assignments and double quotes for quoted strings</li>
+      <li> Commas are reserved for delimiting multiple variables</li>
+    </ul>
+    <h3>Examples</h3>
+    <div style="overflow-x: scroll;">
+      <table class="bcls-table">
+        <thead class="bcls-table__head">
+          <tr>
+            <th width="252">Table Header</th>
+            <th width="518">Table Header</th>
+          </tr>
+        </thead>
+        <tbody class="bcls-table__body">
+          <tr>
+            <td><code>my_var=true</code></td>
+            <td>When clicked, <code>my_var</code> will be set to <code>TRUE</code></td>
+          </tr>
+          <tr>
+            <td><code>my_var=20</code></td>
+            <td>When clicked, <code>my_var</code> will be set to <code>20</code></td>
+          </tr>
+          <tr>
+            <td><code>my_var=&quot;Hello World&quot;</code></td>
+            <td>When clicked, <code>my_var</code> will be set to <code>Hello World</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="bcls-section">
+    <h2 id="quiz-variables">Quiz variables</h2>
+    <p>Every question defined in a Quiz annotation will automatically create two variables:</p>
+    <ol>
+      <li>The value of the answer provided by the viewer.</li>
+      <li>Whether the answer provided by the viewer was correct.</li>
+    </ol>
+    <p>The automatically created variables are named <code>quiz_[annotation-id]_[question index]</code>, for example <code>quiz_123_1</code> would be the answer to the first question in the quiz with id 123. The variable defining if the correct answer was provided will be named <code>quiz_[annotation-id]_[question index]_correct</code>.</p>
+    <figure class="bcls-figure"> <img src="/assets/images/s-brightcove-interactivity-img/annotations/dynamic-annotations/variables-list.png"> </figure>
+    <aside class="bcls-aside bcls-aside--tip language-editable">Note: You do not need to remember the Quiz variable naming scheme. The Quiz variables are automatically available in the UI through the Variables drop down in the edit menu of a text overlay annotation.</aside>
+  </section>
+<section class="bcls-section">
+    <h2 id="environment-variables">Environment variables</h2>
+    <p>Developers using the HapYak Embed API have the ability to directly provide a JSON object when the player is instantiated that defines variables to be used by annotations.</p>
+    <pre>hapyak.viewer({<br>player: ytPlayer,<br>playerType: &quot;youtube&quot;,<br>css: &quot;http://modernizr.com/i/css/modernizr-2.1.1.css?v=1&quot;,<br>width: 640,<br>height: 360,<br>trackId: 640,<br>autoplay: true,<br>variables: {“my_name”:”Kyle”,”my_company”:”HapYak”}<br>});</pre>
+    </section>
+<section class="bcls-section">
+    <h2 id="displaying-variables">Displaying variables</h2>
+    <p>Once variables have been defined they can be used to display dynamic content or to <a href="#overview">create rules</a> which will show or hide another annotation.</p>
+    </section>
+  <section class="bcls-section">
+    <h2 id="overview">Overview of display rules</h2>
+    <p>Display Rules are JavaScript expressions that test variables for the purpose of conditionally displaying annotations. If the expression evaluates to TRUE, the annotation will be rendered. If the expression evaluates to FALSE, the annotation will not be rendered. Display Rules can be added to any annotation type. Common use cases include:</p>
+    <ul>
+      <li>Display an annotation when a viewer clicks on a different annotation</li>
+      <li>Display an annotation when the viewer gets a quiz question right or wrong</li>
+      <li>Display an annotation based on a parameter passed in from an external API </li>
+    </ul>
+    <p>Display rules require that you are comfortable working with HTML, JavaScript and CSS. Codeacademy offers free <a href="https://www.codecademy.com/en/tracks/web" rel="nofollow noopener noreferrer" target="_blank">HTML/CSS</a> and <a href="https://www.codecademy.com/en/tracks/javascript" rel="nofollow noopener noreferrer" target="_blank">JavaScript</a> courses that may be helpful to beginners.</p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="add-rule">Adding a display rule</h2>
+    <p>To add a display rule to an annotation, follow these steps.</p>
+    <ol class="bcls-tasklist-restart">
+      <li>Login to Video Cloud Studio.</li>
+      <li>Open the <strong>Interactivity</strong> module.</li>
+      <li> Click on a project <strong>Title</strong> to open it.</li>
+      <li>In the list of annotations, locate the annotation and click the edit icon (<img src="/assets/images/s-brightcove-interactivity-img/platform/custom-annotations/display-rules/icon-edit.png">).</li>
+      <li>In the <strong>Edit</strong> menu, click <strong>More...</strong></li>
+      <li>Click <strong>Display Rule</strong>.
+        <figure class="bcls-figure"> <img src="/assets/images/s-brightcove-interactivity-img/annotations/dynamic-annotations/new-display-rule.png"> </figure>
+        <aside class="bcls-aside bcls-aside--information language-editable">Note: The <strong>Select Variable</strong> dropdown is only available if a quiz has been added to the project.</aside>
+      </li>
+      <li>Enter the display rule. The expression entered in this dialog will be evaluated prior to rendering the annotation.<br>
+      </li>
+      <li>Click <span class="button-blue"><strong>Submit</strong></span>.</li>
+      <li>Click <strong>Done</strong>.</li>
+    </ol>
+  </section>
+  <section class="bcls-section">
+    <h2 id="syntax">Display rule syntax</h2>
+    <h3>Testing for a set variable</h3>
+    <p>Rule: <code>[variable name]</code> eg. <code>my_var</code></p>
+    <p>This is the same as writing <code>my_var=true</code>. This will be true if the resolved variable is defined and it’s value is not false.</p>
+    <h3>Testing equality</h3>
+    <p>Rule: <code>[variable name]==&quot;value&quot;</code> eg. <code>my_var==&quot;Kyle&quot;</code></p>
+    <p>This will be true only if the resolved variable is exactly equal to the string value between the single quotes.</p>
+    <h3>Testing for correct quiz answers</h3>
+    <p>Rule: <code>[quiz variable name]_correct</code> eg. <code>quiz_123_1_correct</code></p>
+    <p>This will be true only if the resolved variable is equal to the correct answer of the quiz question.</p>
+    <h3>Testing for incorrect quiz answers</h3>
+    <p>Rule: <code>[quiz variable name] &amp;&amp; ![quiz variable name]_correct</code> eg. <code>quiz_123_1 &amp;&amp;<br>
+      !quiz_123_1_correct</code></p>
+    <p>This will be true only if the resolved variable is NOT equal to the correct answer of the quiz question.</p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="example">Example</h2>
+    <p>Here's a basic example. Clicking on one annotation will make another appear.</p>
+    <iframe src="https://players.brightcove.net/1752604059001/85HiqvJnMe_default/index.html?videoId=1739617402811689392&interactivityProjectId=64079144f079a10017a7470f" allowfullscreen="" allow="encrypted-media" width="960" height="540"></iframe>
+    <p>In this example, a triggered action is set at the beginning of the video to set a JavaScript variable <code>apple</code> to <code>true</code>.</p>
+    <p>The image and text annotations are configured with the same start and end times.</p>
+    <p>The apple and orange images are both image overlays. They both have display rules set so they only show if their respective JavaScript variable (<code>apple</code> or <code>orange</code>) is set to <code>true</code>. For example, here is the display rule for the orange.</p>
+    <p>
+      <figure class="bcls-figure"> <img src="/assets/images/s-brightcove-interactivity-img/annotations/dynamic-annotations/orange-display-rule.png"></figure>
+    </p>
+    <p>This will cause the orange image overlay to only display when the variable <code>orange = true</code>.</p>
+    <p>The text overlay <strong>Click here to change the image to display an orange</strong> is configured with a display rule to display when <code>apple = true</code>. The <strong>Link</strong> setting is configured to switch the variables when clicked.</p>
+    <p>
+      <figure class="bcls-figure"> <img src="/assets/images/s-brightcove-interactivity-img/annotations/dynamic-annotations/orange-text.png"></figure>
+    </p>
+    <p>So clicking the text will set <code>orange</code> to <code>true</code> which will make the alternate text overlay and orange image both appear.</p>
+  </section>
+</article>
